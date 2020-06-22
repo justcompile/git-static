@@ -1,0 +1,11 @@
+#!/bin/bash
+
+tag=${DOCKER_TAG}
+
+if ! [ "$tag" = "latest" ]; then
+  tag=${tag#v}
+fi
+
+echo "TAG: $tag"
+
+docker build --build-arg GIT_VERSION=$tag -f $DOCKERFILE_PATH -t $IMAGE_NAME .
